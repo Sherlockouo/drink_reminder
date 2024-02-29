@@ -11,7 +11,7 @@ def init():
         # api_key=os.environ.get("OPENAI_API_KEY"),
         # base_url=os.environ.get("OPENAI_BASE_URL")
         
-        api_key= "ghu_LEjjZ8Cde4rxST7n26rJstTYdeCxlu18BTxS"
+        api_key="ghu_LEjjZ8Cde4rxST7n26rJstTYdeCxlu18BTxS",
         base_url="http://192.168.10.32:8848/v1"
     )
     
