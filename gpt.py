@@ -8,8 +8,11 @@ def init():
     global client
     _ = load_dotenv(find_dotenv())
     client = OpenAI(
-        api_key=os.environ.get("OPENAI_API_KEY"),
-        base_url=os.environ.get("OPENAI_BASE_URL")
+        # api_key=os.environ.get("OPENAI_API_KEY"),
+        # base_url=os.environ.get("OPENAI_BASE_URL")
+        
+        api_key= "ghu_3aVraMNirjfe5CSQ5rsTCYowgZwHaj1KVLHZ"
+        base_url="http://192.168.10.32:8848/v1"
     )
     
 init()
