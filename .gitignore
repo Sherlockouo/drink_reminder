@@ -5,3 +5,4 @@ wxBot_logs/
 .env
 .vscode/
 log
+*.log
