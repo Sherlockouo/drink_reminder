@@ -4,7 +4,7 @@ from gpt import chat_with_gpt, chat_with_gpt_stream
 
 gpt = Blueprint('index', __name__)
 
-@gpt.route('/chat', methods=['GET','POST'])
+@gpt.route('/chat', methods=['POST'])
 def chat():
     
     msg = request.get_json().get("message")
@@ -15,7 +15,7 @@ def chat():
     
     res = chat_with_gpt_stream(msg,model="moonshot-v1-8k")
         
-    @stream_with_context()
+    @stream_with_context
     def generate():
         # 迭代流式事件
         for event in res:
