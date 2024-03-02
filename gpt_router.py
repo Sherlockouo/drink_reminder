@@ -1,29 +1,8 @@
-import json
 from flask import Blueprint,request,Response,stream_with_context
 
 from gpt import chat_with_gpt, chat_with_gpt_stream
-from sendmsg import send_msg
-from drink_reminder import msgs
 
 gpt = Blueprint('index', __name__)
-
-@gpt.route('/', methods=['GET','POST'])
-def index():
-    # print("request ",)
-    if request.form.get('type') != 'text':
-        # nothing happens
-        send_msg(messageSender,"听不懂你在说什么哦！")
-        return 
-    source = request.form.get('source')
-    sourceJson = json.loads(source)
-    messageSender = sourceJson['from']['payload']['name']
-    
-    message = request.form.get('content')
-    
-    res = chat_with_gpt(message,model="gpt-4")
-    replyMsg = res.choices[0].message.content
-    send_msg(messageSender,replyMsg)
-    return "OK"
 
 @gpt.route('/chat', methods=['GET','POST'])
 def chat():
