@@ -18,7 +18,7 @@ def init():
 init()
 
 
-def chat_with_gpt(message,model="gpt-3.5-turbo",temperature=0.5):
+def chat_with_gpt(message,model="gpt-3.5-turbo",temperature=0.3):
     response = client.with_options(max_retries=3).chat.completions.create(
         model=model,
         messages=[
