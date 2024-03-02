@@ -4,6 +4,11 @@ from gpt import chat_with_gpt, chat_with_gpt_stream
 
 gpt = Blueprint('index', __name__)
 
+@gpt.route('/', methods=['GET'])
+def index():
+    return "Server is running! ^_^"
+
+
 @gpt.route('/chat', methods=['POST'])
 def chat():
     
