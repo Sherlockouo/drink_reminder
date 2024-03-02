@@ -11,14 +11,20 @@ def index():
 
 @gpt.route('/chat', methods=['POST'])
 def chat():
-    
     msg = request.get_json().get("message")
+    model =  request.get_json().get("model")
+    temperature =  request.get_json().get("temperature")
     
     if msg == "" or  msg == None :
         # nothing happens
-        return Response()
-    
-    res = chat_with_gpt_stream(msg,model="moonshot-v1-8k")
+        return Response.status_code(400)
+    if not model:
+        model = "moonshot-v1-8k"
+    if not temperature:
+        temperature = 0.3
+        
+    print(msg,model,temperature)
+    res = chat_with_gpt_stream(msg,model,temperature)
         
     @stream_with_context
     def generate():
