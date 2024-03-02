@@ -6,3 +6,4 @@ wxBot_logs/
 .vscode/
 log
 *.log
+tmp
