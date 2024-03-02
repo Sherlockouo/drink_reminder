@@ -1,6 +1,7 @@
-from flask import Blueprint,request,Response,stream_with_context
+from flask import Blueprint,request,Response,stream_with_context, jsonify
 
-from gpt import chat_with_gpt, chat_with_gpt_stream
+from gpt import chat_with_gpt, chat_with_gpt_stream,get_models
+
 
 gpt = Blueprint('index', __name__)
 
@@ -8,6 +9,13 @@ gpt = Blueprint('index', __name__)
 def index():
     return "Server is running! ^_^"
 
+@gpt.route('/models', methods=['GET'])
+def models():
+    model_list = get_models()
+    model_data = model_list.data
+    # 将model_data转换为字典，以便jsonify可以处理
+    models_dict = {"models": [{"id": model.id} for model in model_data]}
+    return jsonify(models_dict)
 
 @gpt.route('/chat', methods=['POST'])
 def chat():
@@ -15,10 +23,10 @@ def chat():
     model =  request.get_json().get("model")
     temperature =  request.get_json().get("temperature")
     
-    if msg == "" or  msg == None :
+    if msg == "" or  msg == None or (temperature != None and (temperature < 0 or temperature > 1)):
         # nothing happens
         return Response.status_code(400)
-    if not model:
+    if not model or model =="":
         model = "moonshot-v1-8k"
     if not temperature:
         temperature = 0.3
