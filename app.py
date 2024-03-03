@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from gpt_router import gpt
+from router.gpt_router import gpt
 
 
 app = Flask(__name__)
